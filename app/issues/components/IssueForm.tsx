@@ -20,7 +20,7 @@ interface Props {
    issue?: Issue
 }
 
-const IssueForm = ({issue}: {issue?: Issue} ) => {
+const IssueForm = ({ issue }: { issue?: Issue }) => {
    const router = useRouter();
    const { register, control, handleSubmit, formState: { errors } } = useForm<IssueFormData>({
       resolver: zodResolver(issueSchema)
@@ -32,9 +32,12 @@ const IssueForm = ({issue}: {issue?: Issue} ) => {
    const onSubmit = handleSubmit(async (data) => {
       try {
          setSubmitting(true);
-         await axios.post('/api/issues', data);
+         if (issue)
+            axios.patch('/api/issues/' + issue.id, data);
+         else
+            await axios.post('/api/issues', data);
          router.push('/issues')
-
+         router.refresh()
       } catch (error) {
          setSubmitting(false);
          setError("An error occurred while submitting the form")
@@ -67,7 +70,10 @@ const IssueForm = ({issue}: {issue?: Issue} ) => {
             <ErrorMessage>
                {errors.description?.message}
             </ErrorMessage>
-            <Button disabled= {isSubmitting}>Submit new issues {isSubmitting && <Spinner/>}</Button>
+            <Button disabled={isSubmitting}>
+               {issue ? 'Updated Issue' : 'Submit new issues'}{' '}
+               {isSubmitting && <Spinner />}
+            </Button>
          </form >
       </div >
    )
