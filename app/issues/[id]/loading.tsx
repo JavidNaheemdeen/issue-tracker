@@ -1,5 +1,5 @@
 import { Flex, Card, Box } from '@radix-ui/themes'
-import { Skeleton } from '@/app/components'
+import { Skeleton } from '@/app/components/index'
 
 
 const LadingIssueDetailPage = () => {

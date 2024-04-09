@@ -1,4 +1,4 @@
-import { Skeleton } from '@/app/components'
+import { Skeleton } from '@/app/components/index'
 import { Table } from '@radix-ui/themes'
 import IssueAction from './IssueAction'
 
