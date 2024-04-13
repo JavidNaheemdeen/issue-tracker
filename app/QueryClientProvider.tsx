@@ -6,8 +6,7 @@ import { PropsWithChildren } from 'react';
 const queryClient = new QueryClient();
 
 const QueryClientProvider = ({children}: PropsWithChildren) => {
-  return 
-  (
+  return (
     <ReactQueryClientProvider client={queryClient}>
       {children}
     </ReactQueryClientProvider>
