@@ -36,7 +36,8 @@ const IssuesPage = async ({ searchParams }: Props) => {
    const issues = await prisma.issue.findMany({
       where: {
          status
-      }
+      },
+      orderBy
    }
    );
 
